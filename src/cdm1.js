@@ -21,7 +21,7 @@ define(['Crafty', 'Colors'], function() {
 
 
         init: function() {
-            this.requires('2D, DOM, Color, Mouse, KeyboardEvent')
+            this.requires('2D, DOM, Color, Mouse, KeyboardEvent, Text')
 
             this.attr({
                 w: 100,
@@ -31,6 +31,7 @@ define(['Crafty', 'Colors'], function() {
             this.__color = Colors.rand();
             this.color(this.__color);
         },
+
 
         sound: function(sound) {
             this.__sound = sound;
@@ -44,6 +45,13 @@ define(['Crafty', 'Colors'], function() {
             // set play- and mute event
             this.bind('MouseDown', this.__play);
             this.bind('MouseUp', this.__mute);
+
+            // show text
+            this.text(sound.toUpperCase());
+            this.textColor(Colors.complement(this.__color));
+            this.textFont('family', 'monospace');
+            this.textFont('size', '30px');
+            this.css('textAlign', 'center');
 
             return this;
         },
@@ -64,6 +72,8 @@ define(['Crafty', 'Colors'], function() {
                     this.__mute();
                 }
             });
+
+            return this;
         }
 
     });
@@ -73,10 +83,10 @@ define(['Crafty', 'Colors'], function() {
         run: function() {
             Crafty.init(200, 200);
 
-            Crafty.e('Sound').sound('bd').shift(0, 100).key('G');
-            Crafty.e('Sound').sound('sd').shift(100, 100).key('H');
-            Crafty.e('Sound').sound('ch').shift(0, 0).key('T');
-            Crafty.e('Sound').sound('oh').shift(100, 0).key('Z');
+            Crafty.e('Sound').sound('bd').shift(0, 100).key('g');
+            Crafty.e('Sound').sound('sd').shift(100, 100).key('h');
+            Crafty.e('Sound').sound('ch').shift(0, 0).key('t');
+            Crafty.e('Sound').sound('oh').shift(100, 0).key('z');
         }
     };
 
