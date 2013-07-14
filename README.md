@@ -3,6 +3,11 @@
 Drumpad based on Crafty
 
 
+## Demo
+
+http://pklink.github.io/CDM1/demo1.html
+
+
 ## Credits
 
 * http://craftyjs.com/
