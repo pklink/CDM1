@@ -24,11 +24,11 @@ define(['Crafty', 'Colors'], function() {
             this.requires('2D, DOM, Color, Mouse, KeyboardEvent, Text')
 
             this.attr({
-                w: 100,
-                h: 100
+                w: DCM1.width / 2,
+                h: DCM1.height / 2
             });
 
-            this.__color = Colors.rand();
+            this.__color = Colors.rand('hex');
             this.color(this.__color);
         },
 
@@ -50,7 +50,7 @@ define(['Crafty', 'Colors'], function() {
             this.text(sound.toUpperCase());
             this.textColor(Colors.complement(this.__color));
             this.textFont('family', 'monospace');
-            this.textFont('size', '30px');
+            this.textFont('size', DCM1.height / 6 + 'px');
             this.css('textAlign', 'center');
 
             return this;
@@ -78,17 +78,25 @@ define(['Crafty', 'Colors'], function() {
 
     });
 
-    return {
+    var DCM1 = {
 
-        run: function() {
-            Crafty.init(200, 200);
+        width: 0,
 
-            Crafty.e('Sound').sound('bd').shift(0, 100).key('g');
-            Crafty.e('Sound').sound('sd').shift(100, 100).key('h');
+        height: 0,
+
+        run: function(width, height) {
+            DCM1.width = width;
+            DCM1.height = height;
+
+            Crafty.init(width, height);
+            Crafty.e('Sound').sound('bd').shift(0, height / 2).key('g');
+            Crafty.e('Sound').sound('sd').shift(width / 2, height / 2).key('h');
             Crafty.e('Sound').sound('ch').shift(0, 0).key('t');
-            Crafty.e('Sound').sound('oh').shift(100, 0).key('z');
+            Crafty.e('Sound').sound('oh').shift(width / 2, 0).key('z');
         }
     };
+
+    return DCM1;
 
 });
 

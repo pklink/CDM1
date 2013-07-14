@@ -8,11 +8,13 @@
                 Colors: ['http://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.1/colors.min', 'libs/colors-1.2.1.min'],
                 Crafty: ['http://cdnjs.cloudflare.com/ajax/libs/crafty/0.5.3/crafty-min', 'libs/crafty-0.5.3.min']
             },
+
+            // for disabling caching
             urlArgs: "bust=" +  (new Date()).getTime()
         })
 
         require(['src/cdm1'], function(cdm1) {
-            cdm1.run();
+            cdm1.run(250, 250);
         });
     </script>
 </head>
