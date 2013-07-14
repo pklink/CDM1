@@ -12,9 +12,9 @@
             urlArgs: "bust=" +  (new Date()).getTime()
         })
 
-        require([
-                'src/cdm1'
-        ]);
+        require(['src/cdm1'], function(cdm1) {
+            cdm1.run();
+        });
     </script>
 </head>
 <body>

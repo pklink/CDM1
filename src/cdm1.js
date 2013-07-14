@@ -1,7 +1,5 @@
 
-require(['barman', 'Crafty', 'Colors'], function(barman) {
-
-    var Class = barman.Class;
+define(['Crafty', 'Colors'], function() {
 
     // Create sound-component
     Crafty.c('Sound', {
@@ -10,8 +8,20 @@ require(['barman', 'Crafty', 'Colors'], function(barman) {
 
         __color: null,
 
+
+        __play: function() {
+            this.color('yellow');
+            Crafty.audio.play(this.__sound);
+        },
+
+
+        __mute: function() {
+            this.color(this.__color);
+        },
+
+
         init: function() {
-            this.requires('2D, DOM, Color, Mouse')
+            this.requires('2D, DOM, Color, Mouse, KeyboardEvent')
 
             this.attr({
                 w: 100,
@@ -31,35 +41,44 @@ require(['barman', 'Crafty', 'Colors'], function(barman) {
                 'sounds/' + sound + '.wav'
             ]);
 
-            this.bind('MouseDown', function() {
-                this.color('yellow');
-                Crafty.audio.play(this.__sound);
-            })
-
-            this.bind('MouseUp', function() {
-                this.color(this.__color);
-            })
+            // set play- and mute event
+            this.bind('MouseDown', this.__play);
+            this.bind('MouseUp', this.__mute);
 
             return this;
         },
 
-    });
+        key: function(key) {
+            key = key.toUpperCase();
 
-    var CDM1 = Class.create({
+            // play sound
+            this.bind('KeyDown', function(e) {
+                if (e.key == Crafty.keys[key]) {
+                    this.__play();
+                }
+            });
 
-        constructor: function() {
-            Crafty.init(200, 200);
-            Crafty.background('green');
-
-            Crafty.e('Sound').sound('bd').shift(0, 100);
-            Crafty.e('Sound').sound('sd').shift(100, 100);
-            Crafty.e('Sound').sound('ch').shift(0, 0);
-            Crafty.e('Sound').sound('oh').shift(100, 0);
+            // mute sound
+            this.bind('KeyUp', function(e) {
+                if (e.key == Crafty.keys[key]) {
+                    this.__mute();
+                }
+            });
         }
 
     });
 
-    new CDM1();
+    return {
+
+        run: function() {
+            Crafty.init(200, 200);
+
+            Crafty.e('Sound').sound('bd').shift(0, 100).key('G');
+            Crafty.e('Sound').sound('sd').shift(100, 100).key('H');
+            Crafty.e('Sound').sound('ch').shift(0, 0).key('T');
+            Crafty.e('Sound').sound('oh').shift(100, 0).key('Z');
+        }
+    };
 
 });
 
