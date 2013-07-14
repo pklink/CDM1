@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script>
+    <script type="text/javascript">
+        require.config({
+            paths: {
+                Colors: ['http://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.1/colors.min', 'libs/colors-1.2.1.min'],
+                Crafty: ['http://cdnjs.cloudflare.com/ajax/libs/crafty/0.5.3/crafty-min', 'libs/crafty-0.5.3.min']
+            },
+            urlArgs: "bust=" +  (new Date()).getTime()
+        })
+
+        require(['http://raw.github.com/pklink/CDM1/master/src/cdm1.js'], function(cdm1) {
+            cdm1.run();
+        });
+    </script>
+</head>
+<body>
+
+<p>Shortcuts are <code>G</code>, <code>H</code>, <code>T</code> and <code>Z</code></p>
+
+</body>
+</html>
